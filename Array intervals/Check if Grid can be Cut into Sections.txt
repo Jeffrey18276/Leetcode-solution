@@ -1,0 +1,39 @@
+class Solution {
+    public List<int[]>mergeOpen(int n,int[][]rect,boolean vertical){
+        List<int[]>intervals=new ArrayList<>();
+
+        for(int []i:rect){
+            intervals.add(vertical?new int[]{i[0],i[2]}:new int[]{i[1],i[3]});
+        }
+
+        intervals.sort((a,b)->Integer.compare(a[0],b[0]));
+
+        List<int[]>merge=new ArrayList<>();
+
+        for(int i=0;i<intervals.size();i++){
+            int start=intervals.get(i)[0];
+            int end=intervals.get(i)[1];
+
+            if(merge.isEmpty() || merge.get(merge.size()-1)[1]<=start){
+                merge.add(new int[]{start,end});
+            }
+            else{
+                merge.get(merge.size()-1)[1]=Math.max(merge.get(merge.size()-1)[1],end);
+            }
+        }
+
+        return merge;
+    }
+
+    public boolean checkValidCuts(int n, int[][] rectangles) {
+        List<int[]>lsX=mergeOpen(n,rectangles,true);
+
+
+        if(lsX.size()>=3)return true;
+
+        List<int[]>lsY=mergeOpen(n,rectangles,false);
+        if(lsY.size()>=3)return true;
+
+        return false;
+    }
+}
