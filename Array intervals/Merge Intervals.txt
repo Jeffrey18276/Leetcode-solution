@@ -1,0 +1,25 @@
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        
+        List<int[]>merge=new ArrayList<>();
+
+        Arrays.sort(intervals,new Comparator<int[]>(){
+            public int compare(int [] a,int [] b){
+                return Integer.compare(a[0],b[0]);
+            }
+        }
+        );
+
+        for(int []rows:intervals){
+            int start=rows[0];
+            int end=rows[1];
+
+            if(merge.isEmpty() || merge.get(merge.size()-1)[1]<start){
+                merge.add(rows);
+            }else{
+                merge.get(merge.size()-1)[1]=Math.max(merge.get(merge.size()-1)[1],end);
+            }
+        }
+        return merge.toArray(new int[merge.size()][2]);
+    }
+}
