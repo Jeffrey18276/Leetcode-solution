@@ -1,0 +1,41 @@
+class Solution {
+    public int minOperations(int[][] grid, int x) {
+
+        int m=grid.length;
+        int n=grid[0].length;
+
+       int []arr=new int [m*n];
+
+        int ind=0;
+
+       for(int row[]:grid){
+        for(int num:row){
+            arr[ind++]=num;
+        }
+       }
+
+       Arrays.sort(arr);
+       int newleng=arr.length;
+
+
+      int targetidx=arr.length/2;
+       int targetele=arr[targetidx];
+
+       int op=0;
+
+       for(Integer it :arr){
+            int diff=Math.abs(it-targetele);
+
+            if(diff%x!=0)return -1;
+            op+=diff/x;
+
+       }
+       return op;
+
+
+
+
+
+
+    }
+}
