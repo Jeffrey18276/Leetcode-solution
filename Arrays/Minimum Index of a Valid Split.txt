@@ -1,0 +1,34 @@
+class Solution {
+
+    public int majority(List<Integer>nums){
+        HashMap<Integer,Integer>mpp=new HashMap<>();
+
+        for(Integer it:nums)mpp.put(it,mpp.getOrDefault(it,0)+1);
+
+        for(Map.Entry<Integer,Integer>entry:mpp.entrySet()){
+            if(entry.getValue()>nums.size()/2)return entry.getKey();
+        }
+        return -1;
+    }
+
+
+    public int minimumIndex(List<Integer> nums) {
+        int n=nums.size();
+       int dominant= majority(nums);
+       int totalCount=0,prefixCount=0;
+
+       for(Integer it:nums){
+        if(dominant==it)totalCount++;
+       }
+
+        
+       for(int i=0;i<n;i++){
+        if(nums.get(i)==dominant)prefixCount++;
+        if(prefixCount*2 > i+1 && (totalCount-prefixCount)*2>(n-i-1))return i;
+         
+       }
+       return -1;
+
+
+    }
+}
