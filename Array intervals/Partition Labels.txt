@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<int> partitionLabels(string s) {
+        int n=s.size();
+        int lastSeen[26];
+
+        for(size_t i{};i<n;i++){
+            lastSeen[s[i]-'a']=i;
+        }
+
+        int start{},maxLast{};
+
+        vector<int>res;
+
+        for(size_t i{};i<n;i++){
+            maxLast=max(maxLast,lastSeen[s[i]-'a']);
+            if(i==maxLast){
+                res.push_back(i-start+1);
+                start=i+1;
+            }
+
+            
+        }
+        return res;
+    }
+
+};
