@@ -1,0 +1,15 @@
+class Solution {
+public:
+    long long maximumTripletValue(vector<int>& nums) {
+        long long maxx_triplet{};
+        int maxx_diff{};
+        int maxx_left{};
+
+        for(int i{};i<nums.size();i++){
+            maxx_triplet=max(maxx_triplet,(long long )maxx_diff*nums[i]);
+            maxx_diff=max(maxx_diff,maxx_left-nums[i]);
+            maxx_left=max(maxx_left,nums[i]);
+        }
+        return maxx_triplet;
+    }
+};
