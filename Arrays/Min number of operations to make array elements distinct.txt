@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int minimumOperations(vector<int>& nums) {
+       
+        int n=nums.size();
+        int cnt{};
+
+        for(int i{};i<n;i++){
+            unordered_set<int>st(nums.begin(),nums.end());
+            if(nums.size()==st.size())break;
+            cnt++;
+            nums.erase(nums.begin(), nums.begin() + min(3, (int)nums.size()));
+            
+        }
+        return cnt;
+
+
+    }
+};
